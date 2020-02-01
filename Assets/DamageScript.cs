@@ -18,16 +18,16 @@ public class DamageScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().color = Color.green;
-        GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().text = "Repaired";
-        GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().GetComponent<Renderer>().enabled = false;
+        //GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().color = Color.green;
+        //GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().text = "Repaired";
+        //GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().GetComponent<Renderer>().enabled = false;
 
         CurrentTime = TimeUntilBroken;
     }
     void SetRepairedState()
     {
-        GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().color = Color.green;
-        GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().text = "Repaired";
+        //GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().color = Color.green;
+        //GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().text = "Repaired";
         TextVis = true;
         CurrentVisTime = TextDespanwTime;
     }
@@ -44,7 +44,7 @@ public class DamageScript : MonoBehaviour
                 {
 
                     IsDamaged = false;
-                    GetComponent<MeshFilter>().mesh = RepariedObject.GetComponent<MeshFilter>().mesh;
+                    GetComponent<MeshFilter>().sharedMesh = RepariedObject.GetComponent<MeshFilter>().sharedMesh;
 
                     Repairing = false;
                     SetRepairedState();
@@ -60,7 +60,7 @@ public class DamageScript : MonoBehaviour
             if(CurrentVisTime < 0.1f)
             {
                 TextVis = false;
-                GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().GetComponent<Renderer>().enabled = false;
+                //GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().GetComponent<Renderer>().enabled = false;
 
             }
         }
@@ -72,11 +72,11 @@ public class DamageScript : MonoBehaviour
         if (CurrentTime < 0.1f)
         {
 
-            GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().color = Color.red;
-            GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().text = "Damaged";
-            GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().GetComponent<Renderer>().enabled = true;
+            //GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().color = Color.red;
+            //GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().text = "Damaged";
+            //GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().GetComponent<Renderer>().enabled = true;
             IsDamaged = true;
-            GetComponent<MeshFilter>().mesh = DamagedObject.GetComponent<MeshFilter>().mesh;
+            GetComponent<MeshFilter>().sharedMesh = DamagedObject.GetComponent<MeshFilter>().sharedMesh;
             CurrentRepairTime = TimeUntilRepair;
         }
     }

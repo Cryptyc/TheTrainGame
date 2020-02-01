@@ -10,6 +10,7 @@ public class SceneChangeCollider : MonoBehaviour
     public float Cooldown = 1.0f;
     private float CurrentCooldown = 0.0f;
     public Vector3 NextSceneOffset = new Vector3(8.0f, 0.0f, 0.0f);
+    public Vector3 NextPlayerOffset = new Vector3(3.0f, 0.0f, 0.0f);
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +34,7 @@ public class SceneChangeCollider : MonoBehaviour
             {
                     CurrentCooldown = Cooldown;
                     print("Moving camera");
-                    Camera.main.transform.position += NextSceneOffset;
+//                    Camera.main.transform.position += NextSceneOffset;
                     //                other.gameObject.transform.position += new Vector3(2.0f, 0.0f, 0.0f);
             }
         }

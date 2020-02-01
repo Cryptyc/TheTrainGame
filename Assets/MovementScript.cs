@@ -8,12 +8,13 @@ public class MovementScript : MonoBehaviour
     public float speed = 6.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
-    public float CoolDown = 3.0f;
+    public float CoolDown = 0.3f;
     public float SceneCooldown = 0.3f;
-    private float CurrentCooldown = 1.0f;
+    private float CurrentCooldown = 0.2f;
     private float CurrentSceneCooldown = 1.0f;
     private bool MoveNextUpdate = false;
     private bool MoveLeft = true;
+    private Vector3 NextPlayeOffset;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,14 +28,8 @@ public class MovementScript : MonoBehaviour
         if(MoveNextUpdate)
         {
             print("moving from " + gameObject.transform.position);
-            if(MoveLeft)
-            {
-                gameObject.transform.position = gameObject.transform.position + new Vector3(3.0f, 0.0f, 0.0f);// = new Vector3(-2.0f, 12.0f, 0.0f);
-            }
-            else
-            {
-                gameObject.transform.position = gameObject.transform.position + new Vector3(-3.0f, 0.0f, 0.0f);// = new Vector3(-2.0f, 12.0f, 0.0f);
-            }
+            gameObject.transform.position = gameObject.transform.position + NextPlayeOffset;// = new Vector3(-2.0f, 12.0f, 0.0f);
+
             MoveLeft = !MoveLeft;
             print("moving to " + gameObject.transform.position);
             CurrentCooldown = CoolDown;
@@ -45,7 +40,7 @@ public class MovementScript : MonoBehaviour
         if (CurrentCooldown > 0.0f)
         {
             CurrentCooldown -= Time.deltaTime;
-//            return;
+            return;
 
         }
         if (CurrentSceneCooldown > 0.0f)
@@ -79,13 +74,19 @@ public class MovementScript : MonoBehaviour
             {
                 MoveNextUpdate = true;
                 print("Player Collision");
+                Camera.main.transform.position += collision.gameObject.GetComponent<SceneChangeCollider>().NextSceneOffset;
+                NextPlayeOffset = collision.gameObject.GetComponent<SceneChangeCollider>().NextPlayerOffset;
                 //               characterController.Move(new Vector3(9.0f, 0.0f, 0.0f));
-//                print("moving from " + gameObject.transform.position);
-//                gameObject.transform.position = gameObject.transform.position + new Vector3(9.0f, 0.0f, 0.0f);// = new Vector3(-2.0f, 12.0f, 0.0f);
-//                print("moving to " + gameObject.transform.position);
+                //                print("moving from " + gameObject.transform.position);
+                //                gameObject.transform.position = gameObject.transform.position + new Vector3(9.0f, 0.0f, 0.0f);// = new Vector3(-2.0f, 12.0f, 0.0f);
+                //                print("moving to " + gameObject.transform.position);
 
             }
         }
-//        print("Collider with " + collision.gameObject.tag);
+        else
+        {
+            print("Collider with " + collision.gameObject.tag);
+
+        }
     }
 }

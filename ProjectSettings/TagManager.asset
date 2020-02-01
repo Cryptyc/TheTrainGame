@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - TextLayer
+  - SideWall
+  - DamageText
   layers:
   - Default
   - TransparentFX

@@ -42,13 +42,13 @@ public class InteractableItem : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         colorPicker = Random.Range(0, 10);
-        print("Trigger entered");
+//        print("Trigger entered");
     }
 
     //When the Primitive exits the collision, it will change Color
     private void OnTriggerExit(Collider other)
     {
-        print("Trigger exit");
+//        print("Trigger exit");
         switch (colorPicker)
         {
             case 0: rend.material.color = Color.white; break;

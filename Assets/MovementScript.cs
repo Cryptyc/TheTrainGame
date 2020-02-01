@@ -15,6 +15,12 @@ public class MovementScript : MonoBehaviour
     private bool MoveNextUpdate = false;
     private bool MoveLeft = true;
     private Vector3 NextPlayeOffset;
+    private int MaxCarrages = 1;
+    private int CurrentCarrage = 0;
+    public GameObject CarrigePrefab;
+    public Vector3 NextSpawnOffset;
+    public Quaternion NextSpawnRotation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +72,11 @@ public class MovementScript : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
     }
 
+    void SpawnNewCarrage()
+    {
+        Instantiate(CarrigePrefab, new Vector3(15 *(++MaxCarrages), 0, 0), Quaternion.Euler(0,-90,0));
+    }
+
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "SideWall")
@@ -80,6 +91,18 @@ public class MovementScript : MonoBehaviour
                 //                print("moving from " + gameObject.transform.position);
                 //                gameObject.transform.position = gameObject.transform.position + new Vector3(9.0f, 0.0f, 0.0f);// = new Vector3(-2.0f, 12.0f, 0.0f);
                 //                print("moving to " + gameObject.transform.position);
+                if(NextPlayeOffset.x > 0)
+                {
+                    CurrentCarrage++;
+                }
+                else
+                {
+                    CurrentCarrage--;
+                }
+                if(CurrentCarrage > MaxCarrages)
+                {
+                    SpawnNewCarrage();
+                }
 
             }
         }

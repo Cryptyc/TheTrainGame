@@ -15,6 +15,7 @@ public class DamageScript : MonoBehaviour
     private bool IsDamaged = false;
     private bool Repairing = false;
     private bool TextVis = false;
+    private float RepairProgress = 1.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +51,9 @@ public class DamageScript : MonoBehaviour
                     SetRepairedState();
                     print("repair complete");
                     CurrentTime = TimeUntilBroken;
+                    RepairProgress = 1.0f;
                 }
+                RepairProgress = CurrentRepairTime / TimeUntilRepair;
             }
             return;
         }
@@ -76,6 +79,7 @@ public class DamageScript : MonoBehaviour
             //GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().text = "Damaged";
             //GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().GetComponent<Renderer>().enabled = true;
             IsDamaged = true;
+            RepairProgress = 0.0f;
             GetComponent<MeshFilter>().sharedMesh = DamagedObject.GetComponent<MeshFilter>().sharedMesh;
             CurrentRepairTime = TimeUntilRepair;
         }

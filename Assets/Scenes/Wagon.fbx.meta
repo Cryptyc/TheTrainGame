@@ -3,7 +3,22 @@ guid: b32450609bba9a64abc13d918e0a8014
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BackWallFloor
+    second: {fileID: 2100000, guid: 9ec64e17b6957cbbf9cbd8bde72b5583, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BackWallFloor.001
+    second: {fileID: 2100000, guid: 9ec64e17b6957cbbf9cbd8bde72b5583, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SideWall.002
+    second: {fileID: 2100000, guid: 06373bf4d4e0056f683f3cf37a2856ad, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DamageScript : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class DamageScript : MonoBehaviour
     private bool Repairing = false;
     private bool TextVis = false;
     private float RepairProgress = 1.0f;
+    private Slider progressSlider;	
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,8 @@ public class DamageScript : MonoBehaviour
         //GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().GetComponent<Renderer>().enabled = false;
 
         CurrentTime = TimeUntilBroken;
+	progressSlider = GetComponentsInChildren<Slider>()[0];
+	progressSlider.value = 1.0f;
     }
     void SetRepairedState()
     {
@@ -54,6 +58,9 @@ public class DamageScript : MonoBehaviour
                     RepairProgress = 1.0f;
                 }
                 RepairProgress = CurrentRepairTime / TimeUntilRepair;
+	
+		
+		progressSlider.value = 1.0f - RepairProgress;
             }
             return;
         }
@@ -80,6 +87,7 @@ public class DamageScript : MonoBehaviour
             //GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().GetComponent<Renderer>().enabled = true;
             IsDamaged = true;
             RepairProgress = 0.0f;
+	    progressSlider.value = 0.0f;
             GetComponent<MeshFilter>().sharedMesh = DamagedObject.GetComponent<MeshFilter>().sharedMesh;
             CurrentRepairTime = TimeUntilRepair;
         }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DamageScript : MonoBehaviour
 {
+    public GameObject RepariedObject;
+    public GameObject DamagedObject;
     public float TimeUntilBroken = 5.0f;
     public float TimeUntilRepair = 3.0f;
     public float TextDespanwTime = 1.0f;
@@ -42,6 +44,8 @@ public class DamageScript : MonoBehaviour
                 {
 
                     IsDamaged = false;
+                    GetComponent<MeshFilter>().mesh = RepariedObject.GetComponent<MeshFilter>().mesh;
+
                     Repairing = false;
                     SetRepairedState();
                     print("repair complete");
@@ -72,6 +76,8 @@ public class DamageScript : MonoBehaviour
             GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().text = "Damaged";
             GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().GetComponent<Renderer>().enabled = true;
             IsDamaged = true;
+            GetComponent<MeshFilter>().mesh = DamagedObject.GetComponent<MeshFilter>().mesh;
+            CurrentRepairTime = TimeUntilRepair;
         }
     }
     void OnTriggerEnter(Collider other)
@@ -80,7 +86,7 @@ public class DamageScript : MonoBehaviour
         {
             if(IsDamaged && !Repairing)
             {
-                print("Starting repair");
+//                print("Starting repair");
                 Repairing = true;
             }
         }
@@ -88,12 +94,12 @@ public class DamageScript : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        print("Stopping repair");
         if (other.gameObject.tag == "Player")
         {
             if(IsDamaged && Repairing)
             {
-                print("Stopping repair");
+                CurrentRepairTime = TimeUntilRepair;
+ //               print("Stopping repair");
                 Repairing = false;
             }
         }

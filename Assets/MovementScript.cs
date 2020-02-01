@@ -18,8 +18,8 @@ public class MovementScript : MonoBehaviour
     private int MaxCarrages = 1;
     private int CurrentCarrage = 0;
     public GameObject CarrigePrefab;
-    public Vector3 NextSpawnOffset;
-    public Quaternion NextSpawnRotation;
+    public GameObject ChairPrefab;
+
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +75,14 @@ public class MovementScript : MonoBehaviour
     void SpawnNewCarrage()
     {
         Instantiate(CarrigePrefab, new Vector3(15 *(++MaxCarrages), 0, 0), Quaternion.Euler(0,-90,0));
+        int numCharis = Random.Range(0, 6);
+        for(int itor = 0; itor < numCharis; itor ++ )
+        {
+            float ZPos = Random.Range(0, 2) == 1 ? 1.25f : -1.25f;
+            int XPos = Random.Range(-5, 5);
+            Instantiate(ChairPrefab, new Vector3(15 * MaxCarrages + XPos, 0, ZPos), Quaternion.Euler(-90, 0, -90));
+
+        }
     }
 
     private void OnTriggerEnter(Collider collision)

@@ -22,6 +22,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Door
+    second: {fileID: 2100000, guid: 22f73be144a3f5715b605be733ff610e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RoofOutside
+    second: {fileID: 2100000, guid: 8ca16a7eb3a8c7249b794064152f12a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: SideWall
     second: {fileID: 2100000, guid: 06373bf4d4e0056f683f3cf37a2856ad, type: 2}
   - first:

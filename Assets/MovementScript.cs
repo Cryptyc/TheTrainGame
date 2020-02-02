@@ -19,6 +19,7 @@ public class MovementScript : MonoBehaviour
     private int CurrentCarrage = 0;
     public GameObject CarrigePrefab;
     public GameObject ChairPrefab;
+    private int Chairsrepaired = 0;
 
 
     // Start is called before the first frame update
@@ -75,7 +76,7 @@ public class MovementScript : MonoBehaviour
     void SpawnNewCarrage()
     {
         Instantiate(CarrigePrefab, new Vector3(15 *(++MaxCarrages), 0, 0), Quaternion.Euler(0,-90,0));
-        int numCharis = Random.Range(0, 6);
+        int numCharis = Random.Range(1, 4);
         for(int itor = 0; itor < numCharis; itor ++ )
         {
             float ZPos = Random.Range(0, 2) == 1 ? 1.25f : -1.25f;

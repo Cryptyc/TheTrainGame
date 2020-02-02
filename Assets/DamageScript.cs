@@ -119,7 +119,7 @@ public class DamageScript : MonoBehaviour
         {
             if(IsDamaged && !Repairing)
             {
-//                print("Starting repair");
+                print("Starting repair");
                 Repairing = true;
             }
         }
@@ -132,7 +132,7 @@ public class DamageScript : MonoBehaviour
             if(IsDamaged && Repairing)
             {
                 CurrentRepairTime = TimeUntilRepair;
- //               print("Stopping repair");
+                print("Stopping repair");
                 Repairing = false;
             }
         }

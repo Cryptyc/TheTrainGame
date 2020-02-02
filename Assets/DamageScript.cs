@@ -18,6 +18,7 @@ public class DamageScript : MonoBehaviour
     private bool TextVis = false;
     private bool HasBeenRepaired = false;
     private float RepairProgress = 1.0f;
+    public bool ShouldBreakAgain = false;
     private Slider progressSlider;	
     // Start is called before the first frame update
     void Start()
@@ -55,7 +56,10 @@ public class DamageScript : MonoBehaviour
 
                     IsDamaged = false;
                     GetComponent<MeshFilter>().sharedMesh = RepariedObject.GetComponent<MeshFilter>().sharedMesh;
-                    HasBeenRepaired = true;
+                    if (!ShouldBreakAgain)
+                    {
+                        HasBeenRepaired = true;
+                    }
                     Repairing = false;
                     SetRepairedState();
                     print("repair complete");
@@ -63,7 +67,16 @@ public class DamageScript : MonoBehaviour
                     RepairProgress = 1.0f;
                     GameObject go = GameObject.FindWithTag("ScoreText");
                     ScoreRegister other = (ScoreRegister)go.GetComponent(typeof(ScoreRegister));
-                    other.DamageFixed();
+                    if(ShouldBreakAgain)
+                    {
+                        other.EngineFixed();
+
+                    }
+                    else
+                    {
+                        other.DamageFixed();
+
+                    }
                 }
                 RepairProgress = CurrentRepairTime / TimeUntilRepair;
 	

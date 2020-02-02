@@ -19,7 +19,6 @@ public class MovementScript : MonoBehaviour
     private int CurrentCarrage = 0;
     public GameObject CarrigePrefab;
     public GameObject ChairPrefab;
-    private int Chairsrepaired = 0;
 
 
     // Start is called before the first frame update

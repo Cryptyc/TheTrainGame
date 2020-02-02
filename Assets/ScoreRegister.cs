@@ -31,6 +31,7 @@ public class ScoreRegister : MonoBehaviour
                 TextValue.text = "Game Over Score " + CurrentScore;
                 GameOver = true;
             }
+            progressSlider.value = 1.0f - CurrentEngineTime/MaxEngineTime;
         }
     }
 

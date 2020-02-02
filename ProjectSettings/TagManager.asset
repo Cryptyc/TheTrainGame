@@ -7,6 +7,8 @@ TagManager:
   - TextLayer
   - SideWall
   - DamageText
+  - DamageSlider
+  - ScoreText
   layers:
   - Default
   - TransparentFX

@@ -16,6 +16,7 @@ public class DamageScript : MonoBehaviour
     private bool IsDamaged = false;
     private bool Repairing = false;
     private bool TextVis = false;
+    private bool HasBeenRepaired = false;
     private float RepairProgress = 1.0f;
     private Slider progressSlider;	
     // Start is called before the first frame update
@@ -24,7 +25,7 @@ public class DamageScript : MonoBehaviour
         //GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().color = Color.green;
         //GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().text = "Repaired";
         //GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().GetComponent<Renderer>().enabled = false;
-
+        TimeUntilBroken = Random.Range(TimeUntilBroken, (TimeUntilBroken * 2));
         CurrentTime = TimeUntilBroken;
 	progressSlider = GetComponentsInChildren<Slider>()[0];
 	progressSlider.value = 1.0f;
@@ -40,6 +41,10 @@ public class DamageScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(HasBeenRepaired)
+        {
+            return;
+        }
         if (IsDamaged)
         {
             if(Repairing)
@@ -50,12 +55,15 @@ public class DamageScript : MonoBehaviour
 
                     IsDamaged = false;
                     GetComponent<MeshFilter>().sharedMesh = RepariedObject.GetComponent<MeshFilter>().sharedMesh;
-
+                    HasBeenRepaired = true;
                     Repairing = false;
                     SetRepairedState();
                     print("repair complete");
                     CurrentTime = TimeUntilBroken;
                     RepairProgress = 1.0f;
+                    GameObject go = GameObject.FindWithTag("ScoreText");
+                    ScoreRegister other = (ScoreRegister)go.GetComponent(typeof(ScoreRegister));
+                    other.DamageFixed();
                 }
                 RepairProgress = CurrentRepairTime / TimeUntilRepair;
 	
@@ -87,7 +95,7 @@ public class DamageScript : MonoBehaviour
             //GameObject.FindWithTag("DamageText").GetComponent<TextMesh>().GetComponent<Renderer>().enabled = true;
             IsDamaged = true;
             RepairProgress = 0.0f;
-	    progressSlider.value = 0.0f;
+	        progressSlider.value = 0.0f;
             GetComponent<MeshFilter>().sharedMesh = DamagedObject.GetComponent<MeshFilter>().sharedMesh;
             CurrentRepairTime = TimeUntilRepair;
         }
